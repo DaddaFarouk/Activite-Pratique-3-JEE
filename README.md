@@ -1,3 +1,3 @@
 ## Énoncé
 
-4-	Basculer vers la stratégie UserDetailsService.
+Basculer vers la stratégie UserDetailsService.
