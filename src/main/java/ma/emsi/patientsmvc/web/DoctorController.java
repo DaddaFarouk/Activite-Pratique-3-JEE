@@ -28,10 +28,30 @@ public class DoctorController {
     public String doctors(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "5") int size,
-                           @RequestParam(name = "keyword", defaultValue = "") String keyword
+                           @RequestParam(name = "keyword", defaultValue = "") String keyword,
+                           @RequestParam(name = "active", defaultValue = "false") boolean active,
+                           @RequestParam(name = "inactive", defaultValue = "false") boolean inactive
                             ){
+
         Page<Doctor> pageDoctors=doctorRepository
                 .findByNomContainsOrSpecialityContains(keyword,keyword, PageRequest.of(page, size));
+
+        if (active && !inactive)
+            pageDoctors=doctorRepository
+                    .findByNomContainsAndActiveIsOrSpecialityContainsAndActiveIs(keyword,
+                            true,
+                            keyword,
+                            true,
+                            PageRequest.of(page, size));
+
+        else if (inactive && !active)
+            pageDoctors=doctorRepository
+                    .findByNomContainsAndActiveIsOrSpecialityContainsAndActiveIs(keyword,
+                            false,
+                            keyword,
+                            false,
+                            PageRequest.of(page, size));
+
 
         if (pageDoctors.isEmpty())
             pageDoctors=doctorRepository.findById(Long.parseLong(keyword), PageRequest.of(page, size));
@@ -43,6 +63,8 @@ public class DoctorController {
         model.addAttribute("totalPages",pageDoctors.getTotalPages());
         model.addAttribute("totalPages",pageDoctors.getTotalPages());
         model.addAttribute("totalPages",pageDoctors.getTotalPages());
+        model.addAttribute("active",active);
+        model.addAttribute("inactive",inactive);
         return "doctors";
     }
 

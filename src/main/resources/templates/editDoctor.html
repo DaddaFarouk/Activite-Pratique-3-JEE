@@ -12,7 +12,7 @@
         <div class="mt-3">
             <div class="container col-md-6">
                 <div class="card">
-                    <div class="card-header">New Doctor</div>
+                    <div class="card-header">Edit Doctor</div>
                     <div class="card-body">
                         <form method="post" th:action="@{/admin/saveDoctor(page=${page}, keyword=${keyword})}">
                             <div class="form-group m-2">
@@ -26,7 +26,7 @@
                                 <span class="text-danger" th:errors="${doctor.nom}"></span>
                             </div>
                             <div class="form-group m-2">
-                                <label>Date Naissance</label>
+                                <label>Birthdate</label>
                                 <input class="form-control" type="date" name="dateNaissance" th:value="${doctor.dateNaissance}">
                                 <span class="text-danger" th:errors="${doctor.dateNaissance}"></span>
                             </div>
