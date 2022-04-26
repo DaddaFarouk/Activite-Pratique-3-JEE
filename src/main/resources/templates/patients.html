@@ -46,12 +46,25 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <ul class="nav nav-pills">
-                            <li th:each="page,status:${pages}">
-                                <a th:class="${status.index==currentPage?'btn btn-primary m-lg-1':'btn btn-outline-primary m-lg-1'}"
-                                   th:text="${status.index}"
-                                   th:href="@{/user/index(page=${status.index}, keyword=${keyword})}"
+                        <ul class="pagination">
+                            <li th:class="${currentPage == 0}? 'page-item  disabled' : 'page-item'">
+                                <a class="page-link"
+                                   th:href="@{/user/index(page=${currentPage - 1 }, keyword=${keyword})}"
+                                >Previous</a>
+                            </li>
+
+
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                   th:text="${currentPage + 1}"
                                 ></a>
+                            </li>
+
+
+                            <li th:class="${currentPage<(totalPages - 1)}? 'page-item' : 'page-item disabled'">
+                                <a class="page-link"
+                                th:href="@{/user/index(page=${currentPage + 1 }, keyword=${keyword})}"
+                                >Next</a>
                             </li>
                         </ul>
                     </div>
