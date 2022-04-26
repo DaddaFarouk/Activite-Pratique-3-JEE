@@ -63,7 +63,7 @@ public class PatientsMvcApplication {
         };
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner saveDoctors(DoctorRepository doctorRepository){
         return args -> {
             doctorRepository.save(

@@ -15,32 +15,34 @@
                     <div class="card-header">New Doctor</div>
                     <div class="card-body">
                         <form method="post" th:action="@{/admin/saveDoctor(page=${page}, keyword=${keyword})}">
-                            <div>
+                            <div class="form-group m-2">
                                 <label>ID : </label>
                                 <label th:text="${doctor.id}"> </label>
                                 <input class="form-control" type="hidden" name="id" th:value="${doctor.id}">
                             </div>
-                            <div>
+                            <div class="form-group m-2">
                                 <label for="nom">Nom</label>
                                 <input id="nom" class="form-control" type="text" name="nom" th:value="${doctor.nom}">
                                 <span class="text-danger" th:errors="${doctor.nom}"></span>
                             </div>
-                            <div>
+                            <div class="form-group m-2">
                                 <label>Date Naissance</label>
                                 <input class="form-control" type="date" name="dateNaissance" th:value="${doctor.dateNaissance}">
                                 <span class="text-danger" th:errors="${doctor.dateNaissance}"></span>
                             </div>
-                            <div>
-                                <label>Active</label>
-                                <input type="checkbox" name="active" th:checked="${doctor.active}">
+                            <div class="form-group m-2">
+                                <input id="active" type="checkbox" name="active" th:checked="${doctor.active}">
+                                <label class="custom-control-label" for="active">Active </label>
                                 <span class="text-danger" th:errors="${doctor.active}"></span>
                             </div>
-                            <div>
+                            <div class="form-group m-2">
                                 <label>Speciality</label>
                                 <input class="form-control" type="text" name="speciality" th:value="${doctor.speciality}">
                                 <span class="text-danger" th:errors="${doctor.speciality}"></span>
                             </div>
+                            <div class="form-group m-2">
                             <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                         </form>
                     </div>
                 </div>

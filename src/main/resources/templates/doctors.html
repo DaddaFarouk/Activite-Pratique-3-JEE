@@ -40,13 +40,13 @@
                                     <td th:text="${d.active}"></td>
                                     <td th:text="${d.speciality}"></td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/deleteDoctor(id=${d.id}, keyword=${keyword}, page=${currentPage})}">
-                                            Delete
+                                        <a class="btn btn-success" th:href="@{/admin/editDoctor(id=${d.id}, keyword=${keyword}, page=${currentPage})}">
+                                            Edit
                                         </a>
                                     </td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a class="btn btn-success" th:href="@{/admin/editDoctor(id=${d.id}, keyword=${keyword}, page=${currentPage})}">
-                                            Edit
+                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/deleteDoctor(id=${d.id}, keyword=${keyword}, page=${currentPage})}">
+                                            Delete
                                         </a>
                                     </td>
                                 </tr>
