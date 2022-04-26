@@ -10,10 +10,9 @@
     </head>
     <body>
     <div layout:fragment="content1">
-
-        <div class="container mt-2">
+        <div class="container mt-3">
             <div class="card">
-                <div class="card-header">Liste des patients</div>
+                <div class="card-header">Patients list</div>
                     <div class="card-body text-center">
                         <div class="card-body">
                             <form method="get" th:action="@{/user/index}">
@@ -27,7 +26,7 @@
                                 <tr class="text-center" >
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">Birthdate</th>
                                     <th scope="col">Sick</th>
                                     <th scope="col">Score</th>
                                     <th scope="col" colspan="2" sec:authorize="hasAuthority('ADMIN')">Operations</th>
@@ -77,7 +76,6 @@
                     </div>
             </div>
         </div>
-
     </div>
     </body>
 </html>
