@@ -14,27 +14,34 @@
         <div class="container mt-2">
             <div class="card">
                 <div class="card-header">Liste des patients</div>
-                    <div class="card-body">
-                        <form method="get" th:action="@{/user/index}">
-                            <label>Keyword :</label>
-                            <input type="text" name="keyword" th:value="${keyword}">
-                            <button type="submit" class="btn btn-primary">Chercher</button>
-                        </form>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>TD</th><th>Nom</th><td>Date</td><th>Malade</th><th>Score</th>
+                    <div class="card-body text-center">
+                        <div class="card-body">
+                            <form method="get" th:action="@{/user/index}">
+                                <label>Keyword :</label>
+                                <input type="text" name="keyword" th:value="${keyword}">
+                                <button type="submit" class="btn btn-primary">Chercher</button>
+                            </form>
+                        </div>
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr class="text-center" >
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Sick</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col" colspan="2" sec:authorize="hasAuthority('ADMIN')">Operations</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="p:${listPatients}">
-                                    <td th:text="${p.id}"></td>
+                                <tr class="text-center" th:each="p:${listPatients}">
+                                    <th th:text="${p.id}"></th>
                                     <td th:text="${p.nom}"></td>
                                     <td th:text="${p.dateNaissance}"></td>
                                     <td th:text="${p.malade}"></td>
                                     <td th:text="${p.score}"></td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a onclick="return confirm('Etes vous surs ?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                             Delete
                                         </a>
                                     </td>
@@ -46,8 +53,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li th:class="${currentPage == 0}? 'page-item  disabled' : 'page-item'">
+                        <ul class="pagination justify-content-center">
+                            <li th:class="${currentPage == 0}? 'page-item disabled' : 'page-item'">
                                 <a class="page-link"
                                    th:href="@{/user/index(page=${currentPage - 1 }, keyword=${keyword})}"
                                 >Previous</a>
