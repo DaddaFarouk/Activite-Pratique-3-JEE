@@ -7,5 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
-    Page<Doctor> findByNomContains(String kw, Pageable pageable);
+    Page<Doctor> findByNomContainsOrSpecialityContains(String kw,String same, Pageable pageable);
+    Page<Doctor> findById(Long id, Pageable pageable);
+    Page<Doctor> findByActive(boolean act, Pageable pageable);
 }

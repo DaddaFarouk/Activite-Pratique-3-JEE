@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @AllArgsConstructor
@@ -28,12 +30,18 @@ public class DoctorController {
                            @RequestParam(name = "size", defaultValue = "5") int size,
                            @RequestParam(name = "keyword", defaultValue = "") String keyword
                             ){
+        Page<Doctor> pageDoctors=doctorRepository
+                .findByNomContainsOrSpecialityContains(keyword,keyword, PageRequest.of(page, size));
 
-        Page<Doctor> pageDoctors=doctorRepository.findByNomContains(keyword, PageRequest.of(page, size));
+        if (pageDoctors.isEmpty())
+            pageDoctors=doctorRepository.findById(Long.parseLong(keyword), PageRequest.of(page, size));
+
         model.addAttribute("listDoctors",pageDoctors.getContent());
         model.addAttribute("pages",new int[pageDoctors.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("totalPages",pageDoctors.getTotalPages());
+        model.addAttribute("totalPages",pageDoctors.getTotalPages());
         model.addAttribute("totalPages",pageDoctors.getTotalPages());
         return "doctors";
     }
