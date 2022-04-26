@@ -1,7 +1,9 @@
 package ma.emsi.patientsmvc;
 
+import ma.emsi.patientsmvc.entities.Appointment;
 import ma.emsi.patientsmvc.entities.Doctor;
 import ma.emsi.patientsmvc.entities.Patient;
+import ma.emsi.patientsmvc.repositories.AppointmentRepository;
 import ma.emsi.patientsmvc.repositories.DoctorRepository;
 import ma.emsi.patientsmvc.repositories.PatientRepository;
 import ma.emsi.patientsmvc.security.service.SecurityService;
@@ -9,6 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -77,6 +81,39 @@ public class PatientsMvcApplication {
 
             doctorRepository.findAll().forEach(p -> {
                 System.out.println(p.getNom());
+            });
+        };
+    }
+
+    //@Bean
+    CommandLineRunner saveAppointments(AppointmentRepository appointmentRepository,
+                                       PatientRepository patientRepository,
+                                       DoctorRepository doctorRepository){
+        return args -> {
+            appointmentRepository.save(
+                    new Appointment(null, doctorRepository.findById(3L, PageRequest.of(0, 5)).getContent().get(0),
+                            patientRepository.findById(5L).orElse(null), new Date(),true));
+
+            appointmentRepository.save(
+                    new Appointment(null, doctorRepository.findById(3L, PageRequest.of(0, 5)).getContent().get(0),
+                            patientRepository.findById(6L).orElse(null), new Date(),true));
+
+            appointmentRepository.save(
+                    new Appointment(null, doctorRepository.findById(4L, PageRequest.of(0, 5)).getContent().get(0),
+                            patientRepository.findById(7L).orElse(null), new Date(),true));
+
+            appointmentRepository.save(
+                    new Appointment(null, doctorRepository.findById(4L, PageRequest.of(0, 5)).getContent().get(0),
+                            patientRepository.findById(8L).orElse(null), new Date(),true));
+
+            appointmentRepository.save(
+                    new Appointment(null, doctorRepository.findById(5L, PageRequest.of(0, 5)).getContent().get(0),
+                            patientRepository.findById(9L).orElse(null), new Date(),true));
+
+            appointmentRepository.findAll().forEach(p -> {
+                System.out.println(p.getPatient().getId());
+                System.out.println(p.getDoctor().getId());
+
             });
         };
     }
