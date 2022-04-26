@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{template1}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Form Patients</title>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div layout:fragment="content1">
+        <div class="mt-3">
+            <div class="container col-md-6">
+                <div class="card">
+                    <div class="card-header">New Doctor</div>
+                    <div class="card-body">
+                        <form method="post" th:action="@{/admin/saveDoctor(page=${page}, keyword=${keyword})}">
+                            <div>
+                                <label>ID : </label>
+                                <label th:text="${doctor.id}"> </label>
+                                <input class="form-control" type="hidden" name="id" th:value="${doctor.id}">
+                            </div>
+                            <div>
+                                <label for="nom">Nom</label>
+                                <input id="nom" class="form-control" type="text" name="nom" th:value="${doctor.nom}">
+                                <span class="text-danger" th:errors="${doctor.nom}"></span>
+                            </div>
+                            <div>
+                                <label>Date Naissance</label>
+                                <input class="form-control" type="date" name="dateNaissance" th:value="${doctor.dateNaissance}">
+                                <span class="text-danger" th:errors="${doctor.dateNaissance}"></span>
+                            </div>
+                            <div>
+                                <label>Active</label>
+                                <input type="checkbox" name="active" th:checked="${doctor.active}">
+                                <span class="text-danger" th:errors="${doctor.active}"></span>
+                            </div>
+                            <div>
+                                <label>Speciality</label>
+                                <input class="form-control" type="text" name="speciality" th:value="${doctor.speciality}">
+                                <span class="text-danger" th:errors="${doctor.speciality}"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

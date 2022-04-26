@@ -21,7 +21,7 @@ import java.util.List;
 public class PatientController {
     private PatientRepository patientRepository;
 
-    @GetMapping(path = "/user/index")
+    @GetMapping(path = "/user/indexPatients")
     public String patients(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "5") int size,
@@ -36,16 +36,12 @@ public class PatientController {
         return "patients";
     }
 
-    @GetMapping("/admin/delete")
+    @GetMapping("/admin/deletePatient")
     public String delete(Long id, String keyword, int page){
         patientRepository.deleteById(id);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/indexPatients?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
 
     @GetMapping("/user/patients")
     @ResponseBody
@@ -59,21 +55,21 @@ public class PatientController {
         return "formPatients";
     }
 
-    @PostMapping("/admin/save")
-    public String save(Model model,
+    @PostMapping("/admin/savePatient")
+    public String savePatient(Model model,
                        @Valid Patient patient,
                        BindingResult bindingResult,
                        @RequestParam(defaultValue = "0") int page,
                        @RequestParam(defaultValue = "") String keyword){
         if (bindingResult.hasErrors()) return "formPatients";
         patientRepository.save(patient);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/indexPatients?page="+page+"&keyword="+keyword;
     }
 
     @GetMapping("/admin/editPatient")
     public String editPatient(Model model, Long id, String keyword, int page){
         Patient patient=patientRepository.findById(id).orElse(null);
-        if(patient==null) throw new RuntimeException("Patient introuvable");
+        if(patient==null) throw new RuntimeException("Patient not found!");
         model.addAttribute("patient",patient);
         model.addAttribute("page",page);
         model.addAttribute("keyword",keyword);

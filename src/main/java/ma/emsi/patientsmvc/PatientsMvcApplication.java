@@ -1,6 +1,8 @@
 package ma.emsi.patientsmvc;
 
+import ma.emsi.patientsmvc.entities.Doctor;
 import ma.emsi.patientsmvc.entities.Patient;
+import ma.emsi.patientsmvc.repositories.DoctorRepository;
 import ma.emsi.patientsmvc.repositories.PatientRepository;
 import ma.emsi.patientsmvc.security.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
@@ -58,6 +60,24 @@ public class PatientsMvcApplication {
             securityService.addRoleToUser("Yasmine","USER");
             securityService.addRoleToUser("Hassan","USER");
 
+        };
+    }
+
+    @Bean
+    CommandLineRunner saveDoctors(DoctorRepository doctorRepository){
+        return args -> {
+            doctorRepository.save(
+                    new Doctor(null, "Ayoub", new Date(),false,"Cardiologist"));
+            doctorRepository.save(
+                    new Doctor(null, "Hamza", new Date(),true,"Dentist"));
+            doctorRepository.save(
+                    new Doctor(null, "Ghita", new Date(),true,"Psychiatric"));
+            doctorRepository.save(
+                    new Doctor(null, "Amina", new Date(),false,"Neurologist"));
+
+            doctorRepository.findAll().forEach(p -> {
+                System.out.println(p.getNom());
+            });
         };
     }
 }
