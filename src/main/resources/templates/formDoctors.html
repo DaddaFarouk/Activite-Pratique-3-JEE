@@ -21,8 +21,8 @@
                                 <span class="text-danger" th:errors="${doctor.nom}"></span>
                             </div>
                             <div class="form-group m-2">
-                                <label>Birthdate</label>
-                                <input class="form-control" type="date" name="dateNaissance" th:value="${doctor.dateNaissance}">
+                                <label for="dateNaissance">Birthdate</label>
+                                <input id="dateNaissance" class="form-control" type="date" name="dateNaissance" th:value="${doctor.dateNaissance}">
                                 <span class="text-danger" th:errors="${doctor.dateNaissance}"></span>
                             </div>
                             <div class="form-group m-2">
@@ -31,8 +31,8 @@
                                 <span class="text-danger" th:errors="${doctor.active}"></span>
                             </div>
                             <div class="form-group m-2">
-                                <label>Speciality</label>
-                                <input class="form-control" type="text" name="speciality" th:value="${doctor.speciality}">
+                                <label for="speciality">Speciality</label>
+                                <input id="speciality" class="form-control" type="text" name="speciality" th:value="${doctor.speciality}">
                                 <span class="text-danger" th:errors="${doctor.speciality}"></span>
                             </div>
                             <div class="form-group m-2">

@@ -12,7 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -43,9 +42,7 @@ public class PatientsMvcApplication {
             patientRepository.save(
                     new Patient(null, "Hanae", new Date(),false,32));
 
-            patientRepository.findAll().forEach(p -> {
-                System.out.println(p.getNom());
-            });
+            patientRepository.findAll().forEach(p -> System.out.println(p.getNom()));
         };
     }
 
@@ -79,9 +76,7 @@ public class PatientsMvcApplication {
             doctorRepository.save(
                     new Doctor(null, "Amina", new Date(),false,"Neurologist"));
 
-            doctorRepository.findAll().forEach(p -> {
-                System.out.println(p.getNom());
-            });
+            doctorRepository.findAll().forEach(p -> System.out.println(p.getNom()));
         };
     }
 

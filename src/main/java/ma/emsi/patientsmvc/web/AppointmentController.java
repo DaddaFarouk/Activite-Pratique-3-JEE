@@ -2,7 +2,6 @@ package ma.emsi.patientsmvc.web;
 
 import lombok.AllArgsConstructor;
 import ma.emsi.patientsmvc.entities.Appointment;
-import ma.emsi.patientsmvc.entities.Doctor;
 import ma.emsi.patientsmvc.repositories.AppointmentRepository;
 import ma.emsi.patientsmvc.repositories.DoctorRepository;
 import ma.emsi.patientsmvc.repositories.PatientRepository;

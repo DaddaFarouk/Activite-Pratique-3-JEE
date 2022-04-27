@@ -2,7 +2,6 @@ package ma.emsi.patientsmvc.web;
 
 import lombok.AllArgsConstructor;
 import ma.emsi.patientsmvc.entities.Doctor;
-import ma.emsi.patientsmvc.entities.Patient;
 import ma.emsi.patientsmvc.repositories.DoctorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 @AllArgsConstructor

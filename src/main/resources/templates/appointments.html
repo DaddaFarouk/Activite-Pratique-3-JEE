@@ -16,8 +16,8 @@
                     <div class="card-body text-center">
                         <div class="card-body">
                             <form method="get" th:action="@{/user/indexAppointments}">
-                                <label>Keyword :</label>
-                                <input type="text" name="keyword" th:value="${keyword}">
+                                <label for="keyword">Keyword :</label>
+                                <input id="keyword" type="text" name="keyword" th:value="${keyword}">
                                 <input id="confirmed" class="custom-control-input" type="checkbox" name="confirmed" th:checked="${confirmed}" >
                                 <label class="custom-control-label" for="confirmed">Confirmed</label>
                                 <input id="notConfirmed" class="custom-control-input" type="checkbox" name="notConfirmed" th:checked="${notConfirmed}">

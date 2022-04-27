@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
     Page<Patient> findByNomContains(String kw, Pageable pageable);
-    Page<Patient> findByMalade(boolean bool, Pageable pageable);
     Page<Patient> findByIdOrScore(Long id,int score ,Pageable pageable);
 }
