@@ -9,4 +9,8 @@ public class SecurityController {
     public String notAuthorized(){
         return "403";
     }
+    @GetMapping("/")
+    public String home(){
+        return "home";
+    }
 }

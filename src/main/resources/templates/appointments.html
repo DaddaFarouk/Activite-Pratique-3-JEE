@@ -12,12 +12,16 @@
     <div layout:fragment="content1">
         <div class="container mt-3">
             <div class="card">
-                <div class="card-header">Patients list</div>
+                <div class="card-header">Appointments list</div>
                     <div class="card-body text-center">
                         <div class="card-body">
-                            <form method="get" th:action="@{/user/indexPatients}">
+                            <form method="get" th:action="@{/user/indexAppointments}">
                                 <label for="keyword">Keyword :</label>
                                 <input id="keyword" type="text" name="keyword" th:value="${keyword}">
+                                <input id="confirmed" class="custom-control-input" type="checkbox" name="confirmed" th:checked="${confirmed}" >
+                                <label class="custom-control-label" for="confirmed">Confirmed</label>
+                                <input id="notConfirmed" class="custom-control-input" type="checkbox" name="notConfirmed" th:checked="${notConfirmed}">
+                                <label class="custom-control-label" for="notConfirmed">Not confirmed</label>
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </form>
                         </div>
@@ -25,27 +29,29 @@
                             <thead class="table-light">
                                 <tr class="text-center" >
                                     <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Birthdate</th>
-                                    <th scope="col">Sick</th>
-                                    <th scope="col">Score</th>
+                                    <th scope="col">Doctor</th>
+                                    <th scope="col">Speciality</th>
+                                    <th scope="col">Patient</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Confirmed</th>
                                     <th scope="col" colspan="2" sec:authorize="hasAuthority('ADMIN')">Operations</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center" th:each="p:${listPatients}">
+                                <tr class="text-center" th:each="p:${listAppointments}">
                                     <th th:text="${p.id}"></th>
-                                    <td th:text="${p.nom}"></td>
-                                    <td th:text="${p.dateNaissance}"></td>
-                                    <td th:text="${p.malade}"></td>
-                                    <td th:text="${p.score}"></td>
+                                    <td th:text="${p.doctor.nom}"></td>
+                                    <td th:text="${p.doctor.speciality}"></td>
+                                    <td th:text="${p.patient.nom}"></td>
+                                    <td th:text="${p.dateAppointment}"></td>
+                                    <td th:text="${p.confirmed}"></td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                                        <a class="btn btn-success" th:href="@{/admin/editAppointment(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                             Edit
                                         </a>
                                     </td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/deletePatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/deleteAppointment(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                             Delete
                                         </a>
                                     </td>
@@ -55,7 +61,7 @@
                         <ul class="pagination justify-content-center">
                             <li th:class="${currentPage == 0}? 'page-item disabled' : 'page-item'">
                                 <a class="page-link"
-                                   th:href="@{/user/indexPatients(page=${currentPage - 1 }, keyword=${keyword})}"
+                                   th:href="@{/user/indexAppointments(page=${currentPage - 1 }, keyword=${keyword}, confirmed=${confirmed},notConfirmed=${notConfirmed})}"
                                 >Previous</a>
                             </li>
 
@@ -69,7 +75,7 @@
 
                             <li th:class="${currentPage<(totalPages - 1)}? 'page-item' : 'page-item disabled'">
                                 <a class="page-link"
-                                th:href="@{/user/indexPatients(page=${currentPage + 1 }, keyword=${keyword})}"
+                                th:href="@{/user/indexAppointments(page=${currentPage + 1 }, keyword=${keyword}, confirmed=${confirmed},notConfirmed=${notConfirmed})}"
                                 >Next</a>
                             </li>
                         </ul>

@@ -12,12 +12,18 @@
     <div layout:fragment="content1">
         <div class="container mt-3">
             <div class="card">
-                <div class="card-header">Patients list</div>
+                <div class="card-header">Doctors list</div>
                     <div class="card-body text-center">
                         <div class="card-body">
-                            <form method="get" th:action="@{/user/indexPatients}">
+                            <form method="get" th:action="@{/user/indexDoctors}">
+
                                 <label for="keyword">Keyword :</label>
                                 <input id="keyword" type="text" name="keyword" th:value="${keyword}">
+                                <input id="active" class="custom-control-input" type="checkbox" name="active" th:checked="${active}" >
+                                <label class="custom-control-label" for="active">Active</label>
+                                <input id="inactive" class="custom-control-input" type="checkbox" name="inactive" th:checked="${inactive}">
+                                <label class="custom-control-label" for="inactive">Inactive</label>
+
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </form>
                         </div>
@@ -27,25 +33,25 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Birthdate</th>
-                                    <th scope="col">Sick</th>
-                                    <th scope="col">Score</th>
+                                    <th scope="col">Active</th>
+                                    <th scope="col">Speciality</th>
                                     <th scope="col" colspan="2" sec:authorize="hasAuthority('ADMIN')">Operations</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center" th:each="p:${listPatients}">
-                                    <th th:text="${p.id}"></th>
-                                    <td th:text="${p.nom}"></td>
-                                    <td th:text="${p.dateNaissance}"></td>
-                                    <td th:text="${p.malade}"></td>
-                                    <td th:text="${p.score}"></td>
+                                <tr class="text-center" th:each="d:${listDoctors}">
+                                    <th th:text="${d.id}"></th>
+                                    <td th:text="${d.nom}"></td>
+                                    <td th:text="${d.dateNaissance}"></td>
+                                    <td th:text="${d.active}"></td>
+                                    <td th:text="${d.speciality}"></td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                                        <a class="btn btn-success" th:href="@{/admin/editDoctor(id=${d.id}, keyword=${keyword}, page=${currentPage})}">
                                             Edit
                                         </a>
                                     </td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
-                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/deletePatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                                        <a onclick="return confirm('Are you sure ?')" class="btn btn-danger" th:href="@{/admin/deleteDoctor(id=${d.id}, keyword=${keyword}, page=${currentPage})}">
                                             Delete
                                         </a>
                                     </td>
@@ -55,7 +61,7 @@
                         <ul class="pagination justify-content-center">
                             <li th:class="${currentPage == 0}? 'page-item disabled' : 'page-item'">
                                 <a class="page-link"
-                                   th:href="@{/user/indexPatients(page=${currentPage - 1 }, keyword=${keyword})}"
+                                   th:href="@{/user/indexDoctors(page=${currentPage - 1 }, keyword=${keyword}, active=${active}, inactive=${inactive})}"
                                 >Previous</a>
                             </li>
 
@@ -69,7 +75,7 @@
 
                             <li th:class="${currentPage<(totalPages - 1)}? 'page-item' : 'page-item disabled'">
                                 <a class="page-link"
-                                th:href="@{/user/indexPatients(page=${currentPage + 1 }, keyword=${keyword})}"
+                                th:href="@{/user/indexDoctors(page=${currentPage + 1 }, keyword=${keyword}, active=${active}, inactive=${inactive})}"
                                 >Next</a>
                             </li>
                         </ul>

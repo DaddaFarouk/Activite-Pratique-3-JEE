@@ -31,10 +31,8 @@ public class SecurityServiceImpl implements SecurityService {
         appUser.setPassword(hashedPWD);
         appUser.setActive(true);
         AppUser savedAppUser=appUserRepository.save(appUser);
-
         return savedAppUser;
     }
-
     @Override
     public AppRole saveNewRole(String roleName, String description) {
         AppRole appRole = appRoleRepository.findByRoleName(roleName);
@@ -46,7 +44,6 @@ public class SecurityServiceImpl implements SecurityService {
 
         return savedAppRole;
     }
-
     @Override
     public void addRoleToUser(String username, String roleName) {
         AppUser appUser=appUserRepository.findByUsername(username);
@@ -55,7 +52,6 @@ public class SecurityServiceImpl implements SecurityService {
         if (appRole==null) throw new RuntimeException("Role not found");
         appUser.getAppRoles().add(appRole);
     }
-
     @Override
     public void removeRoleFromUser(String username, String roleName) {
         AppUser appUser=appUserRepository.findByUsername(username);
@@ -64,7 +60,6 @@ public class SecurityServiceImpl implements SecurityService {
         if (appRole==null) throw new RuntimeException("Role not found");
         appUser.getAppRoles().remove(appRole);
     }
-
     @Override
     public AppUser loadUserByUserName(String username) {
         return appUserRepository.findByUsername(username);
