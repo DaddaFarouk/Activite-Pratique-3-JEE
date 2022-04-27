@@ -61,8 +61,6 @@ public class DoctorController {
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
         model.addAttribute("totalPages",pageDoctors.getTotalPages());
-        model.addAttribute("totalPages",pageDoctors.getTotalPages());
-        model.addAttribute("totalPages",pageDoctors.getTotalPages());
         model.addAttribute("active",active);
         model.addAttribute("inactive",inactive);
         return "doctors";
