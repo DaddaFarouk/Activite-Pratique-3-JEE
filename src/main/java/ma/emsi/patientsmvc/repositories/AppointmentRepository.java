@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     Page<Appointment> findByPatient_Id(Long id, Pageable pageable);
+    Page<Appointment> findByConfirmed(boolean bool, Pageable pageable);
 }

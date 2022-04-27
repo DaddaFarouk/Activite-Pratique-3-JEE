@@ -31,11 +31,23 @@ public class AppointmentController {
                           @RequestParam(name = "page", defaultValue = "0") int page,
                           @RequestParam(name = "size", defaultValue = "5") int size,
                           @RequestParam(name = "keyword", defaultValue = "") String keyword,
-                          @RequestParam(name = "confirmed", defaultValue = "false") boolean confirmed
+                          @RequestParam(name = "confirmed", defaultValue = "false") boolean confirmed,
+                          @RequestParam(name = "notConfirmed", defaultValue = "false") boolean notConfirmed
     ){
 
-        Page<Appointment> pageAppointments=appointmentRepository
+        Page<Appointment> pageAppointments;
+
+        if (confirmed && !notConfirmed)
+            pageAppointments=appointmentRepository
+                    .findByConfirmed(true,PageRequest.of(page, size));
+
+        else if (!confirmed && notConfirmed)
+            pageAppointments=appointmentRepository
+                    .findByConfirmed(false,PageRequest.of(page, size));
+        else
+            pageAppointments=appointmentRepository
                 .findAll(PageRequest.of(page, size));
+
 
         model.addAttribute("listAppointments",pageAppointments.getContent());
         model.addAttribute("pages",new int[pageAppointments.getTotalPages()]);
@@ -43,6 +55,7 @@ public class AppointmentController {
         model.addAttribute("keyword",keyword);
         model.addAttribute("totalPages",pageAppointments.getTotalPages());
         model.addAttribute("confirmed",confirmed);
+        model.addAttribute("notConfirmed",notConfirmed);
         return "appointments";
     }
 
