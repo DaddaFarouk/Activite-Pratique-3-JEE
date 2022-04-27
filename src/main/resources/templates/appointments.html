@@ -30,6 +30,7 @@
                                 <tr class="text-center" >
                                     <th scope="col">ID</th>
                                     <th scope="col">Doctor</th>
+                                    <th scope="col">Speciality</th>
                                     <th scope="col">Patient</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Confirmed</th>
@@ -39,8 +40,9 @@
                             <tbody>
                                 <tr class="text-center" th:each="p:${listAppointments}">
                                     <th th:text="${p.id}"></th>
-                                    <td th:text="${p.doctor.id}"></td>
-                                    <td th:text="${p.patient.id}"></td>
+                                    <td th:text="${p.doctor.nom}"></td>
+                                    <td th:text="${p.doctor.speciality}"></td>
+                                    <td th:text="${p.patient.nom}"></td>
                                     <td th:text="${p.dateAppointment}"></td>
                                     <td th:text="${p.confirmed}"></td>
                                     <td sec:authorize="hasAuthority('ADMIN')">
