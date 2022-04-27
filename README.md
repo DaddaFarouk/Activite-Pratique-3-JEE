@@ -1,6 +1,6 @@
 # Activite-Pratique-3-JEE
 
-## [Rapport](https://drive.google.com/file/d/1Zhts0brxfaZvU3Oif98aHSOh0QGh6QJD/view)
+## [Part 1 & 2](https://drive.google.com/file/d/1KsyP7TuIUS-fLVXJ_KSr__kYdzfAk7SJ/view?usp=sharing)
 
 ## Énoncé
 
@@ -23,6 +23,8 @@
 3. Faire la Validation du Formulaire.
 
 4. Editer et mettre à jour un Patient.
+
+## [Part 3 & 4](https://drive.google.com/file/d/1Zhts0brxfaZvU3Oif98aHSOh0QGh6QJD/view?usp=sharing)
 
 ### Partie 3 :
 
